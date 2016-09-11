@@ -1,5 +1,6 @@
 import java.util.*;
 public class Main {
+
 	public static void main(String[] argrs) {
 		Scanner scan = new Scanner(System.in);
 		while(scan.hasNext()) {
@@ -8,23 +9,29 @@ public class Main {
 				System.out.println(0);
 			}else {
 				char[] arrX = s.toCharArray();
-				// char[] arrY =  new char[arrX.length];
-				// for (int i = 0; i < arrX.length; i++) {
-				// 	arrY[arrX.length-1-i] = arrX[i];
-				// }
-				int lcs = getLcsLength(arrX,arrX.length-1,arrX.length-1);
+				char[] arrY =  new char[arrX.length];
+				for (int i = 0; i < arrX.length; i++) {
+					arrY[arrX.length-1-i] = arrX[i];
+				}
+				int lcs = getLcsLength(arrX,arrY);
 				System.out.println(s.length() - lcs);
 			}
 		}
 	}
 
-	public static int getLcsLength(char[] arrX,int i,int j) {
-		if(i < 0 || j < 0) return 0;
-		if(arrX[i] == arrX[arrX.length-1-i]) {
-			return getLcsLength(arrX,i-1,j-1) + 1;
-		}else {
-			return max(getLcsLength(arrX,i,j-1),getLcsLength(arrX,i-1,j));
+	public static int getLcsLength(char[] arrX,char[] arrY) {
+		int len = arrY.length;
+		int[][] tags = new int[len+1][len+1];
+		for (int i = 0; i<len; i++) {
+			for (int j = 0; j < len; j++) {
+				if(arrX[i] == arrY[j]) {
+					tags[i+1][j+1] = tags[i][j] + 1;
+				}else{
+					tags[i+1][j+1] = max(tags[i+1][j],tags[i][j+1]);
+				}
+			}
 		}
+		return tags[len][len];
 	}
 
 	public static int max(int a,int b) {
