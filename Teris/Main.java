@@ -4,7 +4,7 @@ public class Main {
 		Scanner Scanner = new Scanner(System.in);
 		int[][] teris = new int[15][10];
 		int[][] cell = new int[4][4];
-		//while(Scanner.hasNext()) {
+		while(Scanner.hasNext()) {
 			for (int i = 0; i < teris.length; i++) {
 				for (int j = 0; j < teris[0].length; j++) {
 					teris[i][j] = Scanner.nextInt();
@@ -19,7 +19,7 @@ public class Main {
 			int start = Scanner.nextInt();
 			start--;
 
-			int step = 16;
+			int step = 15;
 			for (int i = start; i < start + 4; i++) {
 				int cellJ = 3;
 				for (; cellJ >= 0; cellJ--) {
@@ -27,7 +27,7 @@ public class Main {
 						break;
 					}
 				}
-				int terisJ = 4;
+				int terisJ = 0;
 				for (; terisJ < 15; terisJ++) {
 					if(teris[terisJ][i] == 1) {
 						break;
@@ -57,6 +57,6 @@ public class Main {
 				}
 				System.out.println();
 			}
-		//}
+		}
 	}
 }
